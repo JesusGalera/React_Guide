@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -53,15 +53,9 @@ class App extends Component {
 
 
   render() {
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
 
     let persons = null;
+    let btnClass = '';
 
     if(this.state.showPersons){
       persons = (
@@ -77,18 +71,28 @@ class App extends Component {
         })}
       </div>
       );
+      btnClass = classes.Red;
     }
 
-    return (
+    let assignedClasses = [];
+    if(this.state.persons.length <=2){
+      assignedClasses.push(classes.red);
+      if(this.state.persons.length <=1){
+        assignedClasses.push(classes.bold);
+      }
+    }
 
-      <div className="App">
-        <h1> Hola, somos springmaniacos</h1>
-        <p>¿Están ahí mis vidas? Están ahí? me oyeeen, me escuchan</p>
-        <button
-         style={style}
-         onClick={this.togglePersonsHandler}>Hidde people</button>
-        {persons}
-      </div>
+
+    return (
+        <div className={classes.App}>
+          <h1> Hola, somos springmaniacos</h1>
+          <p className={assignedClasses.join(' ')}>¿Están ahí mis vidas? Están ahí? me oyeeen, me escuchan</p>
+          <button
+           onClick={this.togglePersonsHandler}
+           className={btnClass}>
+           Toggle people</button>
+          {persons}
+        </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'holiwis'));
   }
