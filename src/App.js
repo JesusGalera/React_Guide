@@ -54,7 +54,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -77,18 +78,27 @@ class App extends Component {
         })}
       </div>
       );
+      style.backgroundColor = 'red';
     }
 
-    return (
+    let classes = [];
+    if(this.state.persons.length <=2){
+      classes.push('red');
+      if(this.state.persons.length <=1){
+        classes.push('bold');
+      }
+    }
 
-      <div className="App">
-        <h1> Hola, somos springmaniacos</h1>
-        <p>¿Están ahí mis vidas? Están ahí? me oyeeen, me escuchan</p>
-        <button
-         style={style}
-         onClick={this.togglePersonsHandler}>Hidde people</button>
-        {persons}
-      </div>
+
+    return (
+        <div className="App">
+          <h1> Hola, somos springmaniacos</h1>
+          <p className={classes.join(' ')}>¿Están ahí mis vidas? Están ahí? me oyeeen, me escuchan</p>
+          <button
+           style={style}
+           onClick={this.togglePersonsHandler}>Toggle people</button>
+          {persons}
+        </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'holiwis'));
   }
